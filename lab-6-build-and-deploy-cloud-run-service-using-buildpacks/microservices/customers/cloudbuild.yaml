@@ -23,17 +23,32 @@
 # options:
 #   logging: CLOUD_LOGGING_ONLY
 
+# steps:
+# - name: 'gcr.io/k8s-skaffold/pack' # Use the dedicated Cloud Build 'pack' builder
+#   entrypoint: 'pack' # Explicitly set 'pack' as the entrypoint for this builder
+#   args:
+#   - 'build'
+#   - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest'
+#   - '--builder=gcr.io/buildpacks/builder:latest' # Specify the actual builder image for 'pack'
+#   - '--path=.'
+#   - '--trust-builder' # Fixes status code 51
+#   - '--publish'       # Direct push to registry, bypasses daemon errors
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+
 steps:
-- name: 'gcr.io/k8s-skaffold/pack' # Use the dedicated Cloud Build 'pack' builder
-  entrypoint: 'pack' # Explicitly set 'pack' as the entrypoint for this builder
+- name: 'gcr.io/k8s-skaffold/pack'
+  entrypoint: 'sh'
   args:
-  - 'build'
-  - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest'
-  - '--builder=gcr.io/buildpacks/builder:latest' # Specify the actual builder image for 'pack'
-  - '--path=.'
-  - '--trust-builder' # Fixes status code 51
-  - '--publish'       # Direct push to registry, bypasses daemon errors
+  - '-c'
+  - |
+    pack build us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest \
+    --builder=gcr.io/buildpacks/builder:latest \
+    --path=. \
+    --trust-builder \
+    --publish
 options:
   logging: CLOUD_LOGGING_ONLY
+
 
 
