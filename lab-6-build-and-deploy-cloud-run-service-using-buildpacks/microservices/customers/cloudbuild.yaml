@@ -11,15 +11,27 @@
 # options:
 #   logging: CLOUD_LOGGING_ONLY # Keep your logging option
 
+# steps:
+# - name: 'gcr.io/buildpacks/builder'
+#   args:
+#   - 'pack'
+#   - 'build'
+#   - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest'
+#   - '--path=.'
+#   # Optionally add '--builder gcr.io/buildpacks/builder' if your setup explicitly requires it,
+#   # but often it's implied when using the builder image directly for the step.
+# options:
+#   logging: CLOUD_LOGGING_ONLY
+
 steps:
-- name: 'gcr.io/buildpacks/builder'
+- name: 'gcr.io/k8s-skaffold/pack' # Use the dedicated Cloud Build 'pack' builder
+  entrypoint: 'pack' # Explicitly set 'pack' as the entrypoint for this builder
   args:
-  - 'pack'
   - 'build'
   - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest'
+  - '--builder=gcr.io/buildpacks/builder:latest' # Specify the actual builder image for 'pack'
   - '--path=.'
-  # Optionally add '--builder gcr.io/buildpacks/builder' if your setup explicitly requires it,
-  # but often it's implied when using the builder image directly for the step.
 options:
   logging: CLOUD_LOGGING_ONLY
+
 
