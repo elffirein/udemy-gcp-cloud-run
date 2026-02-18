@@ -6,8 +6,8 @@ steps:
   args: ['build', 
           '--builder', 'gcr.io/buildpacks/builder', 
           '--publish', 'us-east5-docker.pkg.dev/${PROJECT_ID}/udemy-cloud-run/lab-08-get-customers-svc-img',
-          '--trust-builder', # Fixes status code 51
-          '--publish']      # Direct push to registry, bypasses daemon errors
+          '--trust-builder'] # Fixes status code 51
+                # Direct push to registry, bypasses daemon errors
 
 - id: "Deploy Cloud Run Service"
   name: 'gcr.io/cloud-builders/gcloud:latest'
