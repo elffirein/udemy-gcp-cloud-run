@@ -47,6 +47,7 @@ steps:
     --path=. \
     --trust-builder \
     --publish
+    - '--env=GOOGLE_ENTRYPOINT=python main.py' # Replace 'your_script_name.py' with your actual entrypoint script
 options:
   logging: CLOUD_LOGGING_ONLY
 
