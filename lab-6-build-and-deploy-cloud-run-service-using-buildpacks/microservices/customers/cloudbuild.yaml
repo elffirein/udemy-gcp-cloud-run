@@ -42,7 +42,7 @@ steps:
   args:
   - '-c'
   - |
-    pack build us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest \
+    pack build us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/lab-06-get-customers-svc-img:latest \
     --builder=gcr.io/buildpacks/builder:latest \
     --path=lab-6-build-and-deploy-cloud-run-service-using-buildpacks/microservices/customers \
     --trust-builder \
