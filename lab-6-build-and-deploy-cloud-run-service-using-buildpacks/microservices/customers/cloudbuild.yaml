@@ -1,14 +1,12 @@
-# cloudbuild.yaml
 steps:
-- name: 'gcr.io/cloud-builders/gcloud'
-  entrypoint: 'bash'
+- name: 'gcr.io/buildpacks/builder' # This image is designed for Buildpacks and includes 'pack'
   args:
-    - '-c'
-    - |
-      # The pack build command is how Buildpacks are executed
-      # Replace with your specific image name and other pack build arguments
-      pack build us-east5-docker.pkg.dev/$PROJECT_ID/udemy-cloud-run/my-buildpack-image:latest \
-        --builder gcr.io/buildpacks/builder \
-        --path .
+    - 'pack'
+    - 'build'
+    - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest' # Replace with your target image name
+    - '--builder'
+    - 'gcr.io/buildpacks/builder' # Specify the builder again, if needed, or omit if default
+    - '--path'
+    - '.' # Path to your source code
 options:
-  logging: CLOUD_LOGGING_ONLY
+  logging: CLOUD_LOGGING_ONLY # Keep your logging option
