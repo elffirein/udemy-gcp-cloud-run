@@ -44,7 +44,7 @@ steps:
   - |
     pack build us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest \
     --builder=gcr.io/buildpacks/builder:latest \
-    --path=. \
+    --path=lab-6-build-and-deploy-cloud-run-service-using-buildpacks/microservices/customers \
     --trust-builder \
     --publish
     - '--env=GOOGLE_ENTRYPOINT=python main.py' # Replace 'your_script_name.py' with your actual entrypoint script
