@@ -31,6 +31,8 @@ steps:
   - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest'
   - '--builder=gcr.io/buildpacks/builder:latest' # Specify the actual builder image for 'pack'
   - '--path=.'
+  - '--trust-builder' # Fixes status code 51
+  - '--publish'       # Direct push to registry, bypasses daemon errors
 options:
   logging: CLOUD_LOGGING_ONLY
 
