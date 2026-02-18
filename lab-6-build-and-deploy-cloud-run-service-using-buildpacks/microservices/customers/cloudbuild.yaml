@@ -1,12 +1,25 @@
+# steps:
+# - name: 'gcr.io/buildpacks/builder' # This image is designed for Buildpacks and includes 'pack'
+#   args:
+#     - 'pack'
+#     - 'build'
+#     - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest' # Replace with your target image name
+#     - '--builder'
+#     - 'gcr.io/buildpacks/builder' # Specify the builder again, if needed, or omit if default
+#     - '--path'
+#     - '.' # Path to your source code
+# options:
+#   logging: CLOUD_LOGGING_ONLY # Keep your logging option
+
 steps:
-- name: 'gcr.io/buildpacks/builder' # This image is designed for Buildpacks and includes 'pack'
+- name: 'gcr.io/buildpacks/builder'
   args:
-    - 'pack'
-    - 'build'
-    - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest' # Replace with your target image name
-    - '--builder'
-    - 'gcr.io/buildpacks/builder' # Specify the builder again, if needed, or omit if default
-    - '--path'
-    - '.' # Path to your source code
+  - 'pack'
+  - 'build'
+  - 'us-east5-docker.pkg.dev/gcp-pse-457515/udemy-cloud-run/my-buildpack-image:latest'
+  - '--path=.'
+  # Optionally add '--builder gcr.io/buildpacks/builder' if your setup explicitly requires it,
+  # but often it's implied when using the builder image directly for the step.
 options:
-  logging: CLOUD_LOGGING_ONLY # Keep your logging option
+  logging: CLOUD_LOGGING_ONLY
+
