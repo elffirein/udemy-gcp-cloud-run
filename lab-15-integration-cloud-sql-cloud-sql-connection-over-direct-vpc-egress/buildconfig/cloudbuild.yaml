@@ -3,12 +3,12 @@ steps:
   name: 'gcr.io/cloud-builders/docker:latest'
   dir: 'lab-15-integration-cloud-sql-cloud-sql-connection-over-direct-vpc-egress/microservices/customers'
   args: ['build', 
-          '-t', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-monkey-artifact-registry/lab-15-get-customers-svc-img',
+          '-t', 'us-east5-docker.pkg.dev/${PROJECT_ID}/udemy-cloud-run/lab-15-get-customers-svc-img',
           '.']
 
 - id: "Push Docker Image To Artifact Registry"
   name: 'gcr.io/cloud-builders/docker:latest'
-  args: ['push', '--all-tags', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-monkey-artifact-registry/lab-15-get-customers-svc-img']
+  args: ['push', '--all-tags', 'us-east5-docker.pkg.dev/${PROJECT_ID}/udemy-cloud-run/lab-15-get-customers-svc-img']
 
 - id: "Deploy Cloud Run Service"
   name: 'gcr.io/cloud-builders/gcloud:latest'
@@ -18,19 +18,19 @@ steps:
     '--allow-unauthenticated',
     '--memory', '256Mi',
     '--platform', 'managed',
-    '--image', 'us-central1-docker.pkg.dev/${PROJECT_ID}/cloud-monkey-artifact-registry/lab-15-get-customers-svc-img',
+    '--image', 'us-east5-docker.pkg.dev/${PROJECT_ID}/udemy-cloud-run/lab-15-get-customers-svc-img',
     '--timeout', '30',
     '--min-instances', '0',
     '--max-instances', '1',
     '--ingress', 'all',
-    '--region', 'us-central1',
-    '--set-env-vars', 'CLOUD_SQL_CONNECTION_NAME=${PROJECT_ID}:us-central1:customers-db-instance',
-    '--set-secrets', 'DB_USER=db-user:latest',
-    '--set-secrets', 'DB_PASSWORD=db-password:latest',
+    '--region', 'us-east5',
+    '--set-env-vars', 'CLOUD_SQL_CONNECTION_NAME=${PROJECT_ID}:us-east5:udemy-private-service-demo',
+    '--set-secrets', 'DB_USER=udemy-cloud-run-db-user:latest',
+    '--set-secrets', 'DB_PASSWORD=udemy-cloud-run-db-password:latest',
     '--network' ,'default',
     '--subnet', 'default',
     '--vpc-egress', 'private-ranges-only',
-    '--add-cloudsql-instances', '${PROJECT_ID}:us-central1:customers-db-instance'
+    '--add-cloudsql-instances', '${PROJECT_ID}:us-east5:udemy-private-service-demo'
     ]
 timeout: 600s
 options:
