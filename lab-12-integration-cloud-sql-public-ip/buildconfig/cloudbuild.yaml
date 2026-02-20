@@ -3,7 +3,7 @@ steps:
   name: 'gcr.io/cloud-builders/docker:latest'
   dir: 'lab-12-integration-cloud-sql-public-ip/microservices/customers'
   args: ['build', 
-          '-t', 'us-east5-docker.pkg.dev/${PROJECT_ID}/cloud-monkey-artifact-registry/lab-12-get-customers-svc-img',
+          '-t', 'us-east5-docker.pkg.dev/${PROJECT_ID}/udemy-cloud-run/lab-12-get-customers-svc-img',
           '.']
 
 - id: "Push Docker Image To Artifact Registry"
@@ -18,7 +18,7 @@ steps:
     '--allow-unauthenticated',
     '--memory', '256Mi',
     '--platform', 'managed',
-    '--image', 'us-east5-docker.pkg.dev/${PROJECT_ID}/cloud-monkey-artifact-registry/lab-12-get-customers-svc-img',
+    '--image', 'us-east5-docker.pkg.dev/${PROJECT_ID}/udemy-cloud-run/lab-12-get-customers-svc-img',
     '--timeout', '30',
     '--min-instances', '0',
     '--max-instances', '1',
