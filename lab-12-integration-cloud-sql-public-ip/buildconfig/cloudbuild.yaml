@@ -25,8 +25,8 @@ steps:
     '--ingress', 'all',
     '--region', 'us-east5',
     '--set-env-vars', 'DB_HOST=${_DB_HOST}',
-    '--set-secrets', 'DB_USER=db-user:latest',
-    '--set-secrets', 'DB_PASSWORD=db-password:latest'
+    '--set-secrets', 'DB_USER=udemy-cloud-run-db-user:latest',
+    '--set-secrets', 'DB_PASSWORD=udemy-cloud-run-db-password:latest'
     ]
 timeout: 600s
 options:
