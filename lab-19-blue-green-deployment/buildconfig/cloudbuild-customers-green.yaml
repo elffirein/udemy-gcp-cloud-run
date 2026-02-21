@@ -1,7 +1,7 @@
 steps:
 - id: "Build Docker Image"
   name: 'gcr.io/cloud-builders/docker:latest'
-  dir: 'lab-19-blue-green-deployment/microservices/customers'
+  dir: 'lab-19-blue-green-deployment/microservices/customers-green'
   args: ['build', 
           '-t', 'us-east5-docker.pkg.dev/${PROJECT_ID}/udemy-cloud-run/lab-19-get-customers-svc-img',
           '.']
